@@ -1,0 +1,22 @@
+language: python
+python: 3.8
+dist: jammy
+
+services:
+  - docker
+
+before_install:
+  - pip install buildozer cython==0.29.33
+
+script:
+  - buildozer android debug
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  file_glob: true
+  file: bin/*.apk
+  skip_cleanup: true
+  on:
+    repo: beibarskhan1/my-apk-project
+    branch: master
